@@ -4,8 +4,11 @@ export default class Header extends Component {
   render() {
     return (
       <div className="header">
-        <a href="/" className="head-title">
-          metacritic
+        <a href="/">
+          <img
+            className="head-title"
+            src="https://darkzero.co.uk/wp-content/themes/DarkZero/img/logos/metacritic.png"
+          />
         </a>
         <input
           className="searchbar"

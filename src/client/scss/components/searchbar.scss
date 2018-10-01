@@ -1,16 +1,16 @@
 .searchbar {
   padding: 10px;
   border-radius: 10px;
-  background-color: white;
+  background-color: $color5;
   outline: none;
-  color: $salmon;
-  width: 30%;
+  color: $color2;
+  width: 25%;
   border: none;
   overflow: hidden;
   border: 1px solid transparent;
   transition: all 0.5s ease;
   &::placeholder {
-    color: $salmon;
+    color: $color2;
     transition: all 0.5s ease;
   }
   &:focus {
