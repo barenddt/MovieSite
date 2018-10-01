@@ -1,0 +1,22 @@
+.searchbar {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  outline: none;
+  color: $salmon;
+  width: 30%;
+  border: none;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: all 0.5s ease;
+  &::placeholder {
+    color: $salmon;
+    transition: all 0.5s ease;
+  }
+  &:focus {
+    &::placeholder {
+      color: transparent;
+      transform: translateY(10px);
+    }
+  }
+}
