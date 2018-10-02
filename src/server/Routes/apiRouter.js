@@ -20,7 +20,7 @@ function Api() {
       },
       (err, req, body) => {
         let movies = JSON.parse(body);
-        res.json(movies);
+        res.status(200).json(movies);
       }
     );
   });
