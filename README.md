@@ -1,1 +1,1 @@
-# moviesite
+# metacritic clone project
