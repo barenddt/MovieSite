@@ -1,26 +1,32 @@
 import React, { Component } from "react";
 import { DebounceInput } from "react-debounce-input";
+import { connect } from "react-redux";
+import { searchTitles, isSearching } from "../actions/searchActions";
+import logo from "../logo.png";
+import { history } from "../reducers/store";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      query: "",
-      isSearching: false,
-      titles: null
+      query: ""
     };
   }
 
   _makeSearchbox() {
-    if (this.state.titles == null) {
+    if (this.props.search.titles == null) {
       return <p>No titles found.</p>;
     } else {
       let titles = [];
-      this.state.titles.map((title, index) => {
+      this.props.search.titles.map((title, index) => {
         if (titles.length != 5) {
           titles.push(
-            <div key={title.imdbID} className="title-item">
+            <div
+              onClick={() => history.push(`/${title.Title}`)}
+              key={title.imdbID}
+              className="title-item"
+            >
               <img className="poster" src={title.Poster} />
               {title.Title}
             </div>
@@ -32,34 +38,18 @@ export default class Header extends Component {
   }
 
   _queryTitles(e) {
-    this.setState({ query: e.target.value, isSearching: true });
-    fetch("/api/search", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        s: e.target.value,
-        type: ""
-      })
-    })
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ titles: res.Search, isSearching: false });
-      });
+    this.setState({ query: e.target.value });
+    this.props.isSearching(true);
+    this.props.searchTitles(e);
   }
 
   render() {
-    let { isSearching, query } = this.state;
+    let { query } = this.state;
 
     return (
       <div className="header">
         <a href="/">
-          <img
-            className="head-title"
-            src="https://darkzero.co.uk/wp-content/themes/DarkZero/img/logos/metacritic.png"
-          />
+          <img className="head-title" src={logo} />
         </a>
         <div className="search-box">
           <DebounceInput
@@ -69,7 +59,7 @@ export default class Header extends Component {
             onChange={e => this._queryTitles(e)}
             placeholder="Search for Movies, TV Shows & Video Games"
           />
-          {isSearching ? (
+          {this.props.search.isSearching ? (
             <div className="search-results-box">
               <div className="spinner">
                 <div className="bounce1" />
@@ -83,9 +73,23 @@ export default class Header extends Component {
         </div>
         <div className="right-menu">
           <div className="login-btn-header">Login</div>
-          <div className="login-btn-header">Get Started</div>
+          <div className="create-btn-header">+ Create Account</div>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  search: state.search
+});
+
+const mapDispatchToProps = dispatch => ({
+  searchTitles: e => dispatch(searchTitles(e)),
+  isSearching: e => dispatch(isSearching(e))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

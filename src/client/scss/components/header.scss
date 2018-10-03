@@ -8,19 +8,36 @@
 }
 
 .head-title {
-  width: 150px;
+  width: 180px;
 }
 
 .login-btn-header {
   cursor: pointer;
-  transition: all 0.4s ease;
   text-align: center;
   padding: 10px;
   height: 20px;
-  width: 100px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  margin-right: 10px;
   font-size: 1rem;
+  transition: all 0.4s ease;
+  &:hover {
+    color: $accent;
+  }
+}
+
+.create-btn-header {
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  height: 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid $color5;
+  transition: all 0.4s ease;
   &:hover {
     color: $color5;
+    border-color: $accent;
   }
 }
 

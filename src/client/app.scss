@@ -1,13 +1,12 @@
 @import "./scss/palette";
 @import "./scss/typography";
 @import "./scss/base";
-@import "./scss/components/home";
+@import "./scss/components/container.scss";
 @import "./scss/components/searchbar.scss";
 @import "./scss/components/header.scss";
 
 .main {
   display: flex;
   flex: 1;
-  height: 100vh;
   flex-direction: column;
 }

@@ -1,0 +1,2 @@
+export const SEARCH_TITLES = "SEARCH_TITLES";
+export const IS_SEARCHING = "IS_SEARCHING";

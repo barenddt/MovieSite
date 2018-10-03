@@ -34,7 +34,9 @@ module.exports = {
     open: true,
     proxy: {
       "/api": "http://localhost:8080"
-    }
+    },
+    historyApiFallback: true,
+    contentBase: "./"
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
