@@ -14,7 +14,13 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/api", apiRouter);
 
+app.use(express.static("dist"));
+// Handle React routing, return all requests to React app
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../dist", "index.html"));
+});
+
 //Listen on PORT
-app.listen(8080, () =>
+app.listen(process.env.PORT || 8080, () =>
   debug(`Listening on PORT ${chalk.blue(process.env.PORT || 8080)}`)
 );

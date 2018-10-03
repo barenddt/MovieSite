@@ -26,14 +26,14 @@ function Api() {
   });
 
   //Route for specific movie information.
-  apiRoutes.route("/title/:id").get((req, res) => {
+  apiRoutes.route("/title").post((req, res) => {
     request(
       {
         uri: API_URL,
         method: "GET",
         qs: {
           apikey: API_KEY,
-          i: req.params.id
+          i: req.body.id
         }
       },
       (err, req, body) => {

@@ -1,8 +1,14 @@
-import { SEARCH_TITLES, IS_SEARCHING } from "../actions/types";
+import {
+  SEARCH_TITLES,
+  IS_SEARCHING,
+  CLEAR_SEARCH,
+  SELECT_TITLE
+} from "../actions/types";
 
 const initialState = {
   titles: null,
-  isSearching: false
+  isSearching: false,
+  selectedTitle: null
 };
 
 export default function(state = initialState, action) {
@@ -13,6 +19,13 @@ export default function(state = initialState, action) {
       return { ...state };
     case IS_SEARCHING:
       state.isSearching = action.payload.isSearching;
+      return { ...state };
+    case CLEAR_SEARCH:
+      state.titles = action.payload.titles;
+      state.selectedTitle = action.payload.selectedTitle;
+      return { ...state };
+    case SELECT_TITLE:
+      state.selectedTitle = action.payload.selectedTitle;
       return { ...state };
     default:
       return { ...state };

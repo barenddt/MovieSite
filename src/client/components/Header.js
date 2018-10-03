@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { connect } from "react-redux";
-import { searchTitles, isSearching } from "../actions/searchActions";
+import {
+  searchTitles,
+  isSearching,
+  clearSearch,
+  selectTitle
+} from "../actions/searchActions";
 import logo from "../logo.png";
 import { history } from "../reducers/store";
+import { Spring } from "react-spring";
 
 class Header extends Component {
   constructor(props) {
@@ -22,19 +28,35 @@ class Header extends Component {
       this.props.search.titles.map((title, index) => {
         if (titles.length != 5) {
           titles.push(
-            <div
-              onClick={() => history.push(`/${title.Title}`)}
+            <Spring
+              from={{ opacity: 0 }}
+              to={{ opacity: 1 }}
+              delay={100}
               key={title.imdbID}
-              className="title-item"
             >
-              <img className="poster" src={title.Poster} />
-              {title.Title}
-            </div>
+              {styles => (
+                <div
+                  onClick={() => this._selectTitle(title)}
+                  className="title-item"
+                  style={styles}
+                >
+                  <img className="poster" src={title.Poster} />
+                  {title.Title}
+                </div>
+              )}
+            </Spring>
           );
         }
       });
       return titles;
     }
+  }
+
+  _selectTitle(title) {
+    history.push(`/${title.Title}`);
+    this.props.clearSearch();
+    this.setState({ query: "" });
+    this.props.selectTitle(title.imdbID);
   }
 
   _queryTitles(e) {
@@ -48,7 +70,7 @@ class Header extends Component {
 
     return (
       <div className="header">
-        <a href="/">
+        <a onClick={() => history.push("/")}>
           <img className="head-title" src={logo} />
         </a>
         <div className="search-box">
@@ -56,6 +78,7 @@ class Header extends Component {
             minLength={1}
             debounceTimeout={300}
             className="search-bar"
+            value={this.state.query}
             onChange={e => this._queryTitles(e)}
             placeholder="Search for Movies, TV Shows & Video Games"
           />
@@ -86,7 +109,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   searchTitles: e => dispatch(searchTitles(e)),
-  isSearching: e => dispatch(isSearching(e))
+  isSearching: e => dispatch(isSearching(e)),
+  clearSearch: () => dispatch(clearSearch()),
+  selectTitle: e => dispatch(selectTitle(e))
 });
 
 export default connect(
