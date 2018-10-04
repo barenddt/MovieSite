@@ -24,6 +24,9 @@ class Title extends Component {
                   {`${title.Production} | Released: ${title.Released}`}
                 </p>
                 <p className="desc-item">
+                  <span>Summary:</span> {title.Plot}
+                </p>
+                <p className="desc-item">
                   <span>Director:</span> {title.Director}
                 </p>
                 <p className="desc-item">
