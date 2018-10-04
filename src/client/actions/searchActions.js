@@ -42,7 +42,6 @@ export const selectTitle = e => dispatch => {
   })
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       dispatch({
         type: SELECT_TITLE,
         payload: {

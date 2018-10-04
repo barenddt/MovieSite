@@ -5,6 +5,10 @@
   justify-content: space-evenly;
   padding: 10px;
   color: $color5;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .head-title {

@@ -41,9 +41,34 @@ class Title extends Component {
                 <p className="desc-item">
                   <span>Genre:</span> {title.Genre}
                 </p>
+                <p className="desc-item">
+                  <span>Awards:</span> {title.Awards}
+                </p>
+                <p className="desc-item">
+                  <span>Box Office:</span> {title.BoxOffice}
+                </p>
               </div>
             </div>
-            <div className="col-md-4" />
+            <div className="col-md-4">
+              <div className="title-right">
+                <div className="score">
+                  <div className="num num-beta">{title.Metascore}</div>
+                  Betascore
+                </div>
+                <div className="score">
+                  <div className="num num-imdb">{title.imdbRating}</div>
+                  IMDb Rating
+                </div>
+                <div className="score">
+                  <div className="num num-rt">
+                    {title.Ratings[1]
+                      ? title.Ratings[1].Value.replace("%", "")
+                      : "N/A"}
+                  </div>
+                  Rotten Tomatoes
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="loading-container">
