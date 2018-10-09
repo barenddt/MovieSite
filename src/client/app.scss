@@ -7,8 +7,20 @@
 @import "./scss/components/title.scss";
 @import "./scss/components/article.scss";
 
-.main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+html {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $color5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $color1;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: $accent;
+  }
 }

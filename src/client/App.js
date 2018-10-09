@@ -12,15 +12,13 @@ import "./scss/flexboxgrid.min.css";
 export default class App extends Component {
   render() {
     return (
-      <div className="main">
-        <ConnectedRouter history={history}>
-          <Header />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/:title" component={Title} />
-          </Switch>
-        </ConnectedRouter>
-      </div>
+      <ConnectedRouter history={history}>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/:title" component={Title} />
+        </Switch>
+      </ConnectedRouter>
     );
   }
 }

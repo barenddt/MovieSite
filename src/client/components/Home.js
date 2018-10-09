@@ -20,8 +20,11 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
+        <h1 className="home-title">News in Entertainment</h1>
         {this.props.home.news ? (
-          this._makeNews()
+          <div className="row">
+            <div className="col-md-8">{this._makeNews()}</div>
+          </div>
         ) : (
           <div className="spinner">
             <div className="bounce1" />
