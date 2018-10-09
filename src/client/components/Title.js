@@ -5,6 +5,7 @@ class Title extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     let title = this.props.search.selectedTitle;
     return (
@@ -12,16 +13,12 @@ class Title extends Component {
         {title ? (
           <div className="row">
             <div className="col-md-8 title-left">
-              <img
-                className="title-poster"
-                className="poster-title"
-                src={title.Poster}
-              />
+              <img className="poster-title" src={title.Poster} />
               <div className="title-left-right">
                 <h3>{title.Title}</h3>
                 <p className="rated">
-                  <span>{title.Rated}</span>{" "}
-                  {`${title.Production} | Released: ${title.Released}`}
+                  <span>{title.Rated}</span>
+                  {` ${title.Production} | Released: ${title.Released}`}
                 </p>
                 <p className="desc-item">
                   <span>Summary:</span> {title.Plot}

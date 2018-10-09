@@ -1,7 +1,7 @@
 const express = require("express");
 const request = require("request");
 const debug = require("debug")("app:api");
-const { API_KEY, API_URL } = require("../config");
+const { API_KEY, API_URL, NEWS_API_KEY } = require("../config");
 
 function Api() {
   const apiRoutes = express.Router();
@@ -38,7 +38,25 @@ function Api() {
       },
       (err, req, body) => {
         let title = JSON.parse(body);
-        res.json(title);
+        res.status(200).json(title);
+      }
+    );
+  });
+
+  //Get some articles for home page.
+  apiRoutes.route("/news").get((req, res) => {
+    request(
+      {
+        uri: "https://newsapi.org/v2/everything?",
+        method: "GET",
+        qs: {
+          apiKey: NEWS_API_KEY,
+          q: "Movies"
+        }
+      },
+      (err, req, body) => {
+        let news = JSON.parse(body);
+        res.status(200).json(news);
       }
     );
   });
