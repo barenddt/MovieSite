@@ -2,28 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getNews } from "../actions/homeActions";
 import Article from "./Article";
+import Review from "./Review";
 
 class Home extends Component {
   componentDidMount() {
-    this.props.getNews();
-  }
-
-  _makeNews() {
-    let articles = [];
-    this.props.home.news.articles.map(article => {
-      console.log(article);
-      articles.push(<Article data={article} />);
-    });
-    return articles;
+    !this.props.home.news ? this.props.getNews() : null;
   }
 
   render() {
     return (
       <div className="container">
-        <h1 className="home-title">News in Entertainment</h1>
+        <h1 className="home-title">In Entertainment</h1>
         {this.props.home.news ? (
           <div className="row">
             <div className="col-md-8">{this._makeNews()}</div>
+            <div className="col-md-4">{this._makeReviews()}</div>
           </div>
         ) : (
           <div className="spinner">
@@ -34,6 +27,18 @@ class Home extends Component {
         )}
       </div>
     );
+  }
+
+  _makeNews() {
+    let articles = [];
+    this.props.home.news.articles.map((article, i) => {
+      articles.push(<Article key={i} data={article} />);
+    });
+    return articles;
+  }
+
+  _makeReviews() {
+    return <Review />;
   }
 }
 

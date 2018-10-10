@@ -51,7 +51,8 @@ function Api() {
         method: "GET",
         qs: {
           apiKey: NEWS_API_KEY,
-          q: "Movies"
+          q: "Movies",
+          sortBy: "popularity"
         }
       },
       (err, req, body) => {
