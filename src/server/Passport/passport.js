@@ -5,7 +5,7 @@ const User = require("../Models/userModel");
 const { secret } = require("../config");
 
 module.exports = passport => {
-  var opts = {};
+  let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
   opts.secretOrKey = secret;
   passport.use(

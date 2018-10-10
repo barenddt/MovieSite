@@ -53,7 +53,7 @@ class Header extends Component {
   }
 
   _selectTitle(title) {
-    history.push(`/${title.Title}`);
+    history.push(`/to/${title.Title}`);
     this.props.clearSearch();
     this.setState({ query: "" });
     this.props.selectTitle(title.imdbID);
@@ -96,7 +96,12 @@ class Header extends Component {
         </div>
         <div className="right-menu">
           <div className="login-btn-header">Login</div>
-          <div className="create-btn-header">+ Create Account</div>
+          <div
+            onClick={() => history.push("/register")}
+            className="create-btn-header"
+          >
+            + Create Account
+          </div>
         </div>
       </div>
     );

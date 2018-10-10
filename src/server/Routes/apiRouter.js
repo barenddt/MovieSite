@@ -1,11 +1,8 @@
 const express = require("express");
 const request = require("request");
-const debug = require("debug")("app:api");
 const { API_KEY, API_URL, NEWS_API_KEY } = require("../config");
 
-function Api() {
-  const apiRoutes = express.Router();
-
+function Api(apiRoutes = express.Router()) {
   //Route for searching movies.
   apiRoutes.route("/search").post((req, res) => {
     request(
