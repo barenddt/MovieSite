@@ -4,10 +4,20 @@ const morgan = require("morgan");
 const chalk = require("chalk");
 const debug = require("debug")("app");
 const apiRouter = require("./Routes/apiRouter");
+const mongoose = require("mongoose");
+const { mongodb } = require("./config");
 const path = require("path");
 
 //Initialize Express
 const app = express();
+
+//Connect to MongoDB
+mongoose.connect(
+  `mongodb://${mongodb.user}:${
+    mongodb.passw
+  }@ds125953.mlab.com:25953/betacritic`,
+  { useNewUrlParser: true }
+);
 
 //Middleware
 app.use(express.static("dist"));
