@@ -11,10 +11,14 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  email: {
+    type: String,
+    required: true
   }
 });
 
-UserSchema.pre("save", next => {
+UserSchema.pre("save", function(next) {
   let user = this;
   if (this.isModified("password") || this.isNew) {
     bcrypt.genSalt(10, (err, salt) => {
@@ -34,8 +38,8 @@ UserSchema.pre("save", next => {
   }
 });
 
-UserSchema.methods.comparePassword = (passw, cb) => {
-  bcrypt.compare(passw, this.password, (err, isMatch) => {
+UserSchema.methods.comparePassword = (passw, userpassw, cb) => {
+  bcrypt.compare(passw, userpassw, (err, isMatch) => {
     if (err) {
       return cb(err);
     }

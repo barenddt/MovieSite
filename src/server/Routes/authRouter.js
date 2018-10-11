@@ -6,19 +6,23 @@ const User = require("../Models/userModel");
 function Auth(authRoutes = express.Router()) {
   //Route for registration.
   authRoutes.route("/register").post((req, res) => {
-    if (!req.body.username || !req.body.password) {
-      res.json({ success: false, msg: "Please pass username and password." });
+    if (!req.body.username || !req.body.password || !req.body.email) {
+      res.json({ success: false, msg: "Please fill in all fields." });
     } else {
       var newUser = new User({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        email: req.body.email
       });
       // save the user
       newUser.save(function(err) {
         if (err) {
-          return res.json({ success: false, msg: "Username already exists." });
+          return res.json({
+            success: false,
+            msg: "Username already exists."
+          });
         }
-        res.json({ success: true, msg: "Successful created new user." });
+        res.json({ success: true, msg: "Successfully created new user." });
       });
     }
   });
@@ -39,7 +43,10 @@ function Auth(authRoutes = express.Router()) {
           });
         } else {
           // check if password matches
-          user.comparePassword(req.body.password, function(err, isMatch) {
+          user.comparePassword(req.body.password, user.password, function(
+            err,
+            isMatch
+          ) {
             if (isMatch && !err) {
               // if user is found and password is right create a token
               var token = jwt.sign(user.toJSON(), secret);

@@ -17,6 +17,8 @@
 .form-box {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .form-input {
@@ -26,6 +28,8 @@
   outline: none;
   color: $color5;
   border: none;
+  width: 100%;
+  max-width: 310px;
   overflow: hidden;
   border-bottom: 1.5px solid transparent;
   transition: all 0.5s ease;
@@ -59,4 +63,11 @@
     border-color: $accent;
     color: $accent;
   }
+}
+
+.msg {
+  color: $color1;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 600;
 }

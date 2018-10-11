@@ -6,6 +6,7 @@ const debug = require("debug")("app");
 const passport = require("passport");
 const apiRouter = require("./Routes/apiRouter");
 const authRouter = require("./Routes/authRouter");
+const actionsRouter = require("./Routes/actionsRouter");
 const mongoose = require("mongoose");
 const { mongodb } = require("./config");
 const path = require("path");
@@ -27,7 +28,12 @@ app.use(express.static("dist"));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use("/api", apiRouter);
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
+app.use(
+  "/api/actions",
+  passport.authenticate("jwt", { session: false }),
+  actionsRouter
+);
 
 // Handle React routing, return all requests to React app
 app.get("*", (req, res) => {

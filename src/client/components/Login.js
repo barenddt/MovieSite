@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { registerUser } from "../actions/authActions";
+import { loginUser } from "../actions/authActions";
 
-class Register extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       username: null,
-      password: null,
-      password2: null,
-      email: null,
-      passmsg: null
+      password: null
     };
   }
 
@@ -22,18 +19,14 @@ class Register extends Component {
   };
 
   onSubmit = () => {
-    const { password, password2 } = this.state;
-    if (password != password2) {
-      this.setState({ passmsg: "Passwords do not match." });
-    } else {
-      this.props.registerUser(this.state);
-    }
+    const { username, password } = this.state;
+    this.props.loginUser(this.state);
   };
 
   render() {
     return (
       <div className="container form">
-        <div className="form-title">Register</div>
+        <div className="form-title">Login</div>
         <div className="form-box">
           <input
             className="form-input"
@@ -52,31 +45,10 @@ class Register extends Component {
             required
             onChange={this.onChange}
           />
-          <input
-            className="form-input"
-            id="password2"
-            name="password2"
-            type="password"
-            placeholder="Confirm Password"
-            required
-            onChange={this.onChange}
-          />
-          <input
-            className="form-input"
-            id="email"
-            name="email"
-            placeholder="Email"
-            type="email"
-            required
-            onChange={this.onChange}
-          />
           <a onClick={() => this.onSubmit()} className="form-btn">
-            Register
+            Login
           </a>
-          <p className="msg">
-            {this.props.auth.registration.msg}
-            {this.state.passmsg}
-          </p>
+          <p className="msg">{this.props.auth.login.msg}</p>
         </div>
       </div>
     );
@@ -88,10 +60,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  registerUser: e => dispatch(registerUser(e))
+  loginUser: e => dispatch(loginUser(e))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Register);
+)(Login);

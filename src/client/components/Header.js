@@ -10,6 +10,7 @@ import {
 import logo from "../logo.png";
 import { history } from "../reducers/store";
 import { Spring } from "react-spring";
+import axios from "axios";
 
 class Header extends Component {
   constructor(props) {
@@ -18,6 +19,13 @@ class Header extends Component {
     this.state = {
       query: ""
     };
+  }
+
+  componentDidMount() {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "jwtToken"
+    );
+    axios.post("/api/actions/review").then(result => {});
   }
 
   _makeSearchbox() {
@@ -94,15 +102,24 @@ class Header extends Component {
             <div className="search-results-box">{this._makeSearchbox()}</div>
           ) : null}
         </div>
-        <div className="right-menu">
-          <div className="login-btn-header">Login</div>
-          <div
-            onClick={() => history.push("/register")}
-            className="create-btn-header"
-          >
-            + Create Account
+        {localStorage.getItem("jwtToken") ? (
+          <a className="user-block">{localStorage.getItem("username")}</a>
+        ) : (
+          <div className="right-menu">
+            <div
+              onClick={() => history.push("/login")}
+              className="login-btn-header"
+            >
+              Login
+            </div>
+            <div
+              onClick={() => history.push("/register")}
+              className="create-btn-header"
+            >
+              + Create Account
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }

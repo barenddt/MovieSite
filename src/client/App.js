@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Title from "./components/Title";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import { history } from "./reducers/store";
 import "normalize.css";
 import "./app.scss";
@@ -19,6 +20,7 @@ export default class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/to/:title" component={Title} />
           <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
         </Switch>
       </ConnectedRouter>
     );

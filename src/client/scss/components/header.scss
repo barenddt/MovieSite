@@ -50,3 +50,18 @@
   display: flex;
   flex-direction: row;
 }
+
+.user-block {
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  height: 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid $color5;
+  transition: all 0.4s ease;
+  &:hover {
+    color: $color5;
+    border-color: $accent;
+  }
+}
