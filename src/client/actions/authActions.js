@@ -45,3 +45,9 @@ export const loginUser = ({ username, password }) => dispatch => {
       }
     });
 };
+
+export const logoutUser = () => dispatch => {
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("username");
+  history.push("/login");
+};

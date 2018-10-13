@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { selectTitle } from "../actions/searchActions";
 
 class Title extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    let titleID = this.props.match.params.title;
+    if (!this.props.search.selectedTitle) {
+      this.props.selectTitle(titleID);
+    }
   }
 
   render() {
@@ -66,6 +74,17 @@ class Title extends Component {
                 </div>
               </div>
             </div>
+            <div className="reviews">
+              <h1>Reviews</h1>
+              <div className="row">
+                <div className="col-md-6">
+                  <textarea className="form-input" name="title" />
+                </div>
+                <div className="col-md-6">
+                  <textarea className="form-input" name="title" />
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="loading-container">
@@ -85,4 +104,11 @@ const mapStateToProps = state => ({
   search: state.search
 });
 
-export default connect(mapStateToProps)(Title);
+const mapDispatchToProps = dispatch => ({
+  selectTitle: e => dispatch(selectTitle(e))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Title);

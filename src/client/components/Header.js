@@ -7,10 +7,10 @@ import {
   clearSearch,
   selectTitle
 } from "../actions/searchActions";
+import { logoutUser } from "../actions/authActions";
 import logo from "../logo.png";
 import { history } from "../reducers/store";
 import { Spring } from "react-spring";
-import axios from "axios";
 
 class Header extends Component {
   constructor(props) {
@@ -19,13 +19,6 @@ class Header extends Component {
     this.state = {
       query: ""
     };
-  }
-
-  componentDidMount() {
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwtToken"
-    );
-    axios.post("/api/actions/review").then(result => {});
   }
 
   _makeSearchbox() {
@@ -61,7 +54,7 @@ class Header extends Component {
   }
 
   _selectTitle(title) {
-    history.push(`/to/${title.Title}`);
+    history.push(`/id/${title.imdbID}`);
     this.props.clearSearch();
     this.setState({ query: "" });
     this.props.selectTitle(title.imdbID);
@@ -103,7 +96,15 @@ class Header extends Component {
           ) : null}
         </div>
         {localStorage.getItem("jwtToken") ? (
-          <a className="user-block">{localStorage.getItem("username")}</a>
+          <div className="right-menu">
+            <a className="user-block">{localStorage.getItem("username")}</a>
+            <div
+              onClick={() => this.props.logoutUser()}
+              className="login-btn-header"
+            >
+              Logout
+            </div>
+          </div>
         ) : (
           <div className="right-menu">
             <div
@@ -133,7 +134,8 @@ const mapDispatchToProps = dispatch => ({
   searchTitles: e => dispatch(searchTitles(e)),
   isSearching: e => dispatch(isSearching(e)),
   clearSearch: () => dispatch(clearSearch()),
-  selectTitle: e => dispatch(selectTitle(e))
+  selectTitle: e => dispatch(selectTitle(e)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 export default connect(
