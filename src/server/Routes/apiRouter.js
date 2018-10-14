@@ -1,5 +1,6 @@
 const express = require("express");
 const request = require("request");
+const Review = require("../Models/reviewModel");
 const { API_KEY, API_URL, NEWS_API_KEY } = require("../config");
 
 function Api(apiRoutes = express.Router()) {
@@ -57,6 +58,23 @@ function Api(apiRoutes = express.Router()) {
         res.status(200).json(news);
       }
     );
+  });
+
+  apiRoutes.route("/reviews/:id").get((req, res) => {
+    Review.find({ movieId: req.params.id }, (err, reviews) => {
+      if (err) throw err;
+
+      if (reviews) {
+        res.status(200).json({
+          success: true,
+          reviews
+        });
+      } else {
+        res.json({
+          success: false
+        });
+      }
+    });
   });
 
   return apiRoutes;

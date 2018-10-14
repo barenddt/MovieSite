@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectTitle } from "../actions/searchActions";
+import { getReviews } from "../actions/titleActions";
+import Review from "../components/Review";
 
 class Title extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     let titleID = this.props.match.params.title;
     if (!this.props.search.selectedTitle) {
       this.props.selectTitle(titleID);
     }
+    this.props.getReviews(titleID);
   }
 
   render() {
@@ -58,7 +57,7 @@ class Title extends Component {
               <div className="title-right">
                 <div className="score">
                   <div className="num num-beta">{title.Metascore}</div>
-                  Betascore
+                  Metascore
                 </div>
                 <div className="score">
                   <div className="num num-imdb">{title.imdbRating}</div>
@@ -78,10 +77,30 @@ class Title extends Component {
               <h1>Reviews</h1>
               <div className="row">
                 <div className="col-md-6">
-                  <textarea className="form-input" name="title" />
+                  <hr />
+                  <br />
+                  <Review />
+                  <Review />
+                  <Review />
+                  <Review />
                 </div>
                 <div className="col-md-6">
-                  <textarea className="form-input" name="title" />
+                  <input
+                    className="review-input"
+                    placeholder="Title"
+                    name="title"
+                  />
+                  <input
+                    className="review-slider"
+                    type="range"
+                    min="1"
+                    max="100"
+                  />
+                  <textarea
+                    className="review-input"
+                    name="content"
+                    placeholder="Content"
+                  />
                 </div>
               </div>
             </div>
@@ -101,11 +120,13 @@ class Title extends Component {
 }
 
 const mapStateToProps = state => ({
-  search: state.search
+  search: state.search,
+  reviews: state.reviews.reviews
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectTitle: e => dispatch(selectTitle(e))
+  selectTitle: e => dispatch(selectTitle(e)),
+  getReviews: e => dispatch(getReviews(e))
 });
 
 export default connect(

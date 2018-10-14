@@ -22,6 +22,11 @@ const ReviewSchema = new Schema({
   movieId: {
     type: String,
     required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+    required: true
   }
 });
 
