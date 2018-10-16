@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   titles: null,
+  related: null,
   isSearching: false,
   selectedTitle: null
 };
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SEARCH_TITLES:
       state.titles = action.payload.titles;
+      state.related = action.payload.titles;
       state.isSearching = action.payload.isSearching;
       return { ...state };
     case IS_SEARCHING:

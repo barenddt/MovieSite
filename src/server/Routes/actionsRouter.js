@@ -18,11 +18,13 @@ function Actions(actionRoutes = express.Router()) {
 
       if (review) {
         res.json({
-          success: true
+          success: true,
+          msg: "Review posted successfully"
         });
       } else {
         res.json({
-          success: false
+          success: false,
+          msg: "an error occured while posting your review."
         });
       }
     });

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
   username: {
     type: String,
-    unique: true,
     required: true
   },
   title: {

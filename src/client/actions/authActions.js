@@ -30,7 +30,7 @@ export const loginUser = ({ username, password }) => dispatch => {
     .then(result => {
       localStorage.setItem("jwtToken", result.data.token);
       localStorage.setItem("username", username);
-      history.push("/");
+      history.goBack();
     })
     .catch(error => {
       if (error.response.status === 401) {
@@ -46,7 +46,7 @@ export const loginUser = ({ username, password }) => dispatch => {
     });
 };
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = () => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("username");
   history.push("/login");

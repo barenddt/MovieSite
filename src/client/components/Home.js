@@ -16,7 +16,7 @@ class Home extends Component {
         {this.props.home.news ? (
           <div className="row">
             <div className="col-md-8">{this._makeNews()}</div>
-            <div className="col-md-4">{this._makeReviews()}</div>
+            {/* <div className="col-md-4">{this._makeReviews()}</div> */}
           </div>
         ) : (
           <div className="spinner">

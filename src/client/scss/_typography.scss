@@ -35,3 +35,11 @@ h3 {
 .home-title {
   text-transform: uppercase;
 }
+
+.link {
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

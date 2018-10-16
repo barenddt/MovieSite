@@ -10,8 +10,7 @@
   outline: none;
   color: $color5;
   border: none;
-  width: 100%;
-  max-width: 310px;
+  width: 90%;
   overflow: hidden;
   border-bottom: 1.5px solid transparent;
   transition: all 0.5s ease;
@@ -34,6 +33,7 @@
   flex: 1;
   flex-direction: column;
   margin-bottom: 30px;
+  padding-right: 40px;
 }
 
 .review-title {
@@ -68,8 +68,11 @@
 }
 
 .review-user {
-  text-decoration: underline;
+  font-weight: 600;
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .review-slider {
@@ -78,8 +81,10 @@
   border-radius: 10px;
   border-bottom: 1.5px solid transparent;
   background: $color1;
+  width: 100%;
   outline: none;
   transition: all 0.5s ease;
+  margin-bottom: 20px;
   &:focus {
     border-bottom: 1.5px solid $accent;
   }

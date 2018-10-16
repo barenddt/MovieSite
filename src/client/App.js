@@ -18,7 +18,12 @@ export default class App extends Component {
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/id/:title" component={Title} />
+          <Route
+            path="/id/:title"
+            render={props => (
+              <Title key={props.match.params.title} {...props} />
+            )}
+          />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
         </Switch>
